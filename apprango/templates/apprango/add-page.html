@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block bodyblock %}
+
+    <h1>Add Page</h1>
+    <p>
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </p>
+    {% if category == None %}
+        <p>Category does not exist.</p>
+    {% else %}
+        <form id="cat_form" action="{% url 'apprango:add-page' category.slug %}" method="post">
+        {% csrf_token %}
+
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+
+        {% for field in form.visible_fields %}
+            <p>{{ field.errors }}</p>
+            <p>{{ field.help_text }}
+                {{ field }}</p>
+        {% endfor %}
+        <input type="submit" name="submit" value="Create"/>
+    {% endif %}
+</form>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block bodyblock %}
+
+    <body>
+    <h1>{{ name }}</h1>
+
+    {% if category %}
+        {% if pages %}
+            <ul>
+                {% for page in pages %}
+                    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <strong>This category has no pages yet.</strong>
+        {% endif %}
+
+        <p>Add a new <a href="{% url 'apprango:add-page' category.slug %}">page</a></p>
+    {% else %}
+        <strong>The category {{ name }} does not exist.</strong>
+    {% endif %}
+
+{% endblock %}

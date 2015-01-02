@@ -1,0 +1,26 @@
+{% extends 'base.html'%}
+
+{% block bodyblock %}
+
+<p>
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+</p>
+{% if user.is_authenticated %}
+    <p>Hello {{ user.username }}. You are... authenticated!</p>
+{% endif %}
+
+<p>Below is a listing of all Categories in the system.</p>
+{% if objects %}
+    <ul>
+        {% for category in objects %}
+            <li><a href="{% url 'apprango:category' category.slug %}"> {{ category.name }} </a></li>
+        {% endfor %}
+    </ul>
+    <p>You can add a new <a href="{% url 'apprango:add-category' %}">category</a></p>
+{% else %}
+    <strong>There are no categories entered yet.</strong>
+{% endif %}
+
+{% endblock %}

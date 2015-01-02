@@ -1,0 +1,21 @@
+{% extends 'base.html'%}
+
+{% block bodyblock %}
+
+<body>
+    <h1>Register with Apprango</h1>
+
+    {% if registered %}
+        Registration was a success. Proceed to the Login Page
+    {% else %}
+        Please register as a user...
+
+        <form id="reg_form" method="post" action="{% url 'apprango:register' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ frm_user.as_p }}
+            {{ frm_profile.as_p }}
+            <input type="submit" name="submit" value="Register" />
+        </form>
+    {% endif %}
+
+{% endblock %}

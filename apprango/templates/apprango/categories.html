@@ -1,0 +1,14 @@
+{% if categs %}
+    <ul class="nav nav-sidebar">
+        {% for categ in categs %}
+            {% if categ == active_cat %}
+                <li class="active">
+            {% else %}
+                <li>
+            {% endif %}
+                <a href="{% url 'apprango:category' categ.slug %}"> {{ categ.name }} </a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <strong>There are no categories present.</strong>
+{% endif %}
